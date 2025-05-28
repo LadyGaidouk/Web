@@ -66,6 +66,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
 .forms input[type="text"], .forms textarea, .forms input[type="checkbox"],
 .forms input[type="radio"] {
   cursor: var(--cursor-pointer);
+  text-decoration: none;
 }
 
 /* Скрытое honeypot поле */
@@ -140,6 +141,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
   font: 200 18px/1 var(--font-main);
   color: var(--color-white);
   opacity: 0.5;
+  text-decoration: none;
 }
 
 .bt_part2:hover .ball {
