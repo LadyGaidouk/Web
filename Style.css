@@ -21,7 +21,6 @@ body {
   background: var(--color-bg);
   scroll-behavior: smooth;
   overflow-x: hidden;
-  animation: fadeIn 1.5s ease-out forwards; 
   text-decoration: none; 
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-bg);
@@ -78,6 +77,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
   height: 100vh;
   display: grid;
   grid-template-rows: 30px 40px 1fr 1.2fr 10%;
+  animation: fadeIn 1.5s ease-out forwards; 
 }
 .objects {
   grid-row: 4;
