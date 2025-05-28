@@ -8,7 +8,7 @@
   --radius: 10px;
   --font-main: 'Montserrat', sans-serif;
   --gap-xl: 60px;
-  --cursor-default: url("assets/Picture/click.cur") 0 0, default !important;
+  --cursor-default: url("assets/Picture/click.cur") 0 0, default;
   --cursor-pointer: url("assets/Picture/hand.cur") 0 0, pointer !important;
 }
 
