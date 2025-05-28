@@ -1,7 +1,7 @@
 <?php
 
 // === Загрузка переменных окружения ===
-function loadEnvFile(string $filePath = '.env'): void {
+function loadEnvFile(string $filePath = '/etc/secrets/.env'): void {
     if (!file_exists($filePath)) {
         exit("❌ Файл .env не найден");
     }
