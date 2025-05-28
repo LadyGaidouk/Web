@@ -1,0 +1,12 @@
+# Запрещаем индексацию служебных директорий и файлов
+User-agent: *
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /logs/
+Disallow: /bot.php
+Disallow: /.htaccess
+Disallow: /meta.php
+Disallow: /main.js
+
+# Карта сайта для всех поисковых систем
+Sitemap: https://yoursite.com/sitemap.xml

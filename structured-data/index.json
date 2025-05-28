@@ -1,0 +1,19 @@
+{
+    "@context": "https://schema.org ",
+    "@type": "ProfessionalService",
+    "name": "IT Bureau",
+    "description": "Разработка сайтов, чат-ботов, AI-систем и графического дизайна для малого и среднего бизнеса.",
+    "url": "https://yoursite.com/ ",
+    "telephone": "+7 (999) 999-99-99",
+    "sameAs": ["https://t.me/itbureau_bot "],
+    "areaServed": {
+      "@type": "Country",
+      "name": "Россия"
+    },
+    "serviceType": [
+      "UX/UI дизайн",
+      "Создание сайта под ключ",
+      "AI-роботы для автоматизации",
+      "Графический дизайн"
+    ]
+  }

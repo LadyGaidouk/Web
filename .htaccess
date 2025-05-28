@@ -1,0 +1,36 @@
+# Включение механизма перезаписи URL
+RewriteEngine On
+
+# Исключаем файлы в /assets/, чтобы перезапись не затрагивала их
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/assets/
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
+RewriteRule ^([a-zA-Z0-9_-]+)/$ $1.php [L]
+
+# Кеширование статических файлов
+ExpiresActive On
+ExpiresByType text/html "access plus 1 hour"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType image/webp "access plus 6 months"
+ExpiresByType image/svg+xml "access plus 6 months"
+ExpiresByType font/woff2 "access plus 6 months"
+
+# Кеширование с заголовками Cache-Control
+<FilesMatch "\.(css|js|webp|svg|woff2|html)$">
+    Header set Cache-Control "public, max-age=15552000, immutable"
+</FilesMatch>
+
+# Включение Gzip-сжатия для текстовых файлов
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+

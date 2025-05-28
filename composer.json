@@ -1,0 +1,8 @@
+{
+    "name": "ladygaidouk/it-bureau",
+    "description": "IT Bureau website and Telegram bot",
+    "type": "project",
+    "require": {
+        "php": ">=8.0"
+    }
+}
