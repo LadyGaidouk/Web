@@ -138,7 +138,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
       0px 10px 30px rgba(0 0 0 / 0.5);
 }
 .ball_text {
-  font: 200 18px/1 var(--font-main);
+  font: 300 18px/1 var(--font-main);
   color: var(--color-white);
   opacity: 0.5;
   text-decoration: none;
