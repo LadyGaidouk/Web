@@ -68,6 +68,10 @@ label[for], summary, .action-button, .bt_part2, .clickable,
   cursor: var(--cursor-pointer);
   text-decoration: none;
 }
+.clickable {
+  cursor: var(--cursor-pointer);
+  text-decoration: none;
+}
 
 /* Скрытое honeypot поле */
 .honeypot {
