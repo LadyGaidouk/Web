@@ -73,6 +73,10 @@ label[for], summary, .action-button, .bt_part2, .clickable,
   text-decoration: none;
 }
 
+scaleX {
+  transform: scaleX(1.2); 
+}
+
 /* Скрытое honeypot поле */
 .honeypot {
   display: none;
