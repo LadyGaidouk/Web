@@ -74,7 +74,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
 }
 
 scaleX {
-  transform: scaleX(1.2); 
+  transform: scaleX(1.9); 
 }
 
 /* Скрытое honeypot поле */
