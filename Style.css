@@ -26,10 +26,22 @@ body {
   scrollbar-color: var(--color-accent) var(--color-bg);
 }
 
+
+/* Для Chrome/Safari */
+::-webkit-scrollbar {
+  width: 3px; /* Тонкий скроллбар */
+  height: 3px; /* Для горизонтального скролла */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg); /* Цвет трека */
+}
+
+
 body::-webkit-scrollbar-thumb {
   background: var(--color-accent);
   border-radius: 20px;
-  border: 1px solid var(--color-bg);
+  border: 0.5px solid var(--color-bg);
 }
 
 @keyframes fadeIn {
