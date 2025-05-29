@@ -28,7 +28,7 @@
                 <textarea name="message" aria-label="Расскажите о Вашем бизнесе" required>Первым делом - знакомство. Расскажите о Вашей нише, оставьте ссылку на сайт, группу. Проведём оценку и дадим рекомендации</textarea>
                 <label>
                      <input type='checkbox' name='policy' style="opacity: 0.5; margin-left: 20px;" required>
-                        <h6>При отправке заявки я соглашаюсь только с 
+                        <h6>При отправке заявки я соглашаюсь с 
                            <a style="color: var(--color-accent); text-decoration: none;" href="/policy.php">
                                 <span class="clickable">
                                     этим
