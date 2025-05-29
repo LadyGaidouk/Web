@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
     <div class="text">
         <div class="sub-text">
-            <a href="faq.php" class="clickable"><img src="assets/Picture/<.png" alt="Разработать веб сайт"></a>
+            <a href="faq.php" class="clickable"><</a>
             <h1>Заказать IT проект</h1>
             <a href="faq.php" class="clickable"><img src="assets/Picture/>.png" alt="Разработать web сайт"></a>
         </div>
