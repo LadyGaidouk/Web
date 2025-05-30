@@ -21,7 +21,6 @@ body {
   background: var(--color-bg);
   scroll-behavior: smooth;
   overflow-x: hidden;
-  text-decoration: none; 
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-bg);
 }
