@@ -2,11 +2,11 @@
     <div class="text">
         <div class="sub-text2">
             <a href="contact.php" class="clickable">
-                <img src="assets/Picture/<.svg" alt="Заказать чат бот">
+                <img src="assets/Picture/<.svg" alt="Заказать чат бот" style="opacity: 0.3">
             </a>
             <h1>Заказать ли IT проект?</h1>
             <a href="contact.php" class="clickable">
-                <img src="assets/Picture/>.svg" alt="Заказать разработку чат бота">
+                <img src="assets/Picture/>.svg" alt="Заказать разработку чат бота" style="opacity: 0.3">
             </a>
         </div>
     </div>
