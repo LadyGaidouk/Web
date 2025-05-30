@@ -9,7 +9,7 @@
   --font-main: 'Montserrat', sans-serif;
   --gap-xl: 60px;
   --cursor-default: url("assets/Picture/click.cur") 0 0, default;
-  --cursor-pointer: url("assets/Picture/hand.cur") 0 0, pointer !important;
+  --cursor-pointer: url("assets/Picture/hand.cur") 0 0, pointer;
 }
 
 html,
@@ -70,7 +70,7 @@ body::-webkit-scrollbar-thumb {
 input[type="hidden"][name="form_timestamp"] {
   display: none;
 }
-
+/*
 a, button, input[type="button"], input[type="submit"], input[type="reset"],
 [role="button"], [onclick], [tabindex]:not([tabindex="-1"]),
 label[for], summary, .action-button, .bt_part2, .clickable,
@@ -82,11 +82,8 @@ label[for], summary, .action-button, .bt_part2, .clickable,
 .clickable {
   cursor: var(--cursor-pointer);
   text-decoration: none;
-}
+}*/
 
-scaleX {
-  transform: scaleX(1.9); 
-}
 
 /* Скрытое honeypot поле */
 .honeypot {
