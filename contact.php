@@ -1,9 +1,13 @@
 <?php include 'header.php'; ?>
     <div class="text">
         <div class="sub-text">
-            <a href="faq.php" class="clickable"><img src="assets/Picture/<.svg" alt="Заказать сайт"></a>
+            <a href="faq.php" class="clickable">
+                <img src="assets/Picture/<.svg" alt="Заказать сайт" style="opacity: 0.3">
+            </a>
             <h1>Заказать IT проект</h1>
-            <a href="faq.php" class="clickable"><img src="assets/Picture/>.svg" alt="Заказать разработку сайта"></a>
+            <a href="faq.php" class="clickable">
+                <img src="assets/Picture/>.svg" alt="Заказать разработку сайта" style="opacity: 0.3">
+            </a>
         </div>
     </div>
     <div class="description">
