@@ -26,16 +26,13 @@ body {
   scrollbar-color: var(--color-accent) var(--color-bg);
 }
 
-/* Для Chrome/Safari */
 ::-webkit-scrollbar {
-  width: 3px; /* Тонкий скроллбар */
-  height: 3px; /* Для горизонтального скролла */
+  width: 3px;
+  height: 3px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-bg); /* Цвет трека */
+  background: var(--color-bg);
 }
-
 body::-webkit-scrollbar-thumb {
   background: var(--color-accent);
   border-radius: 20px;
