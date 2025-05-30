@@ -1,9 +1,13 @@
 <?php include 'header.php'; ?>
     <div class="text">
         <div class="sub-text2">
-            <a href="contact.php" class="clickable"><img src="assets/Picture/<.svg" alt="Заказать чат бот"</a>
+            <a href="contact.php" class="clickable">
+                <img src="assets/Picture/<.svg" alt="Заказать чат бот">
+            </a>
             <h1>Заказать ли IT проект?</h1>
-            <a href="contact.php" class="clickable"><img src="assets/Picture/>.svg" alt="Заказать разработку чат бота"</a>
+            <a href="contact.php" class="clickable">
+                <img src="assets/Picture/>.svg" alt="Заказать разработку чат бота">
+            </a>
         </div>
     </div>
     <div class="description">
