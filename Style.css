@@ -1,5 +1,6 @@
 :root {
   --color-white: #fff;
+  --font-main: #fff;
   --color-bg: #000004; 
   --color-accent: #ff7eae;
   --color-border-light: rgba(255, 255, 255, 0.1);
@@ -17,14 +18,13 @@ body {
   margin: 0;
   height: 100%;
   font: 100 18px/1 var(--font-main);
-  color: var(--color-white);
   background: var(--color-bg);
   scroll-behavior: smooth;
   overflow-x: hidden;
+  text-decoration: none; 
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-bg);
 }
-
 
 /* Для Chrome/Safari */
 ::-webkit-scrollbar {
@@ -35,7 +35,6 @@ body {
 ::-webkit-scrollbar-track {
   background: var(--color-bg); /* Цвет трека */
 }
-
 
 body::-webkit-scrollbar-thumb {
   background: var(--color-accent);
@@ -70,7 +69,7 @@ body::-webkit-scrollbar-thumb {
 input[type="hidden"][name="form_timestamp"] {
   display: none;
 }
-/*
+
 a, button, input[type="button"], input[type="submit"], input[type="reset"],
 [role="button"], [onclick], [tabindex]:not([tabindex="-1"]),
 label[for], summary, .action-button, .bt_part2, .clickable,
@@ -82,8 +81,7 @@ label[for], summary, .action-button, .bt_part2, .clickable,
 .clickable {
   cursor: var(--cursor-pointer);
   text-decoration: none;
-}*/
-
+}
 
 /* Скрытое honeypot поле */
 .honeypot {
