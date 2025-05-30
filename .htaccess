@@ -1,28 +1,52 @@
 # Включение механизма перезаписи URL
 RewriteEngine On
+RewriteBase /
 
-# Исключаем файлы в /assets/, чтобы перезапись не затрагивала их
+# Блокировка доступа к скрытым файлам
+RewriteRule (^|/)\.(?!well-known) - [F]
+
+# Исключаем реальные файлы и папки
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/assets/
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
-RewriteRule ^([a-zA-Z0-9_-]+)/$ $1.php [L]
+RewriteCond %{REQUEST_URI} !^/(assets|uploads|images)/ [NC]
+
+# Основные правила маршрутизации
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?route=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?route=$1&action=$2 [L,QSA]
+
+# Редирект с index.php на чистый URL
+RewriteCond %{THE_REQUEST} /index\.php [NC]
+RewriteRule ^(.*?)index\.php$ /$1 [R=301,L,NC]
+
+# Удаление слеша в конце
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
 
 # Кеширование статических файлов
-ExpiresActive On
-ExpiresByType text/html "access plus 1 hour"
-ExpiresByType text/css "access plus 1 month"
-ExpiresByType application/javascript "access plus 1 month"
-ExpiresByType image/webp "access plus 6 months"
-ExpiresByType image/svg+xml "access plus 6 months"
-ExpiresByType font/woff2 "access plus 6 months"
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
 
-# Кеширование с заголовками Cache-Control
-<FilesMatch "\.(css|js|webp|svg|woff2|html)$">
-    Header set Cache-Control "public, max-age=15552000, immutable"
-</FilesMatch>
+# Заголовки безопасности
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    <FilesMatch "\.(css|js|webp|svg|woff2|html)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
 
-# Включение Gzip-сжатия для текстовых файлов
+# Gzip-сжатие
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -32,5 +56,5 @@ ExpiresByType font/woff2 "access plus 6 months"
     AddOutputFilterByType DEFLATE application/json
     AddOutputFilterByType DEFLATE application/xml
     AddOutputFilterByType DEFLATE font/woff2
+    AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
-
