@@ -9,8 +9,6 @@
   --radius: 10px;
   --font-main: 'Montserrat', sans-serif;
   --gap-xl: 60px;
-  --cursor-default: url("assets/Picture/click.cur") 0 0, default;
-  --cursor-pointer: url("assets/Picture/hand.cur") 0 0, pointer;
 }
 
 html,
@@ -65,19 +63,6 @@ body::-webkit-scrollbar-thumb {
 /* Временная метка в форме */
 input[type="hidden"][name="form_timestamp"] {
   display: none;
-}
-
-a, button, input[type="button"], input[type="submit"], input[type="reset"],
-[role="button"], [onclick], [tabindex]:not([tabindex="-1"]),
-label[for], summary, .action-button, .bt_part2, .clickable,
-.forms input[type="text"], .forms textarea, .forms input[type="checkbox"],
-.forms input[type="radio"] {
-  cursor: var(--cursor-pointer);
-  text-decoration: none;
-}
-.clickable {
-  cursor: var(--cursor-pointer);
-  text-decoration: none;
 }
 
 /* Скрытое honeypot поле */
