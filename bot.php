@@ -1,29 +1,10 @@
 <?php
-function loadEnvFile(string $filePath = '/etc/secrets/.env'): void {
-    error_log('Проверка .env: существует=' . (file_exists($filePath) ? 'Да' : 'Нет'));
-    error_log('Проверка .env: читаем=' . (is_readable($filePath) ? 'Да' : 'Нет'));
-    error_log('Права .env: ' . (file_exists($filePath) ? substr(sprintf('%o', fileperms($filePath)), -4) : 'Файл не найден'));
-
-    if (!file_exists($filePath)) {
-        error_log('Ошибка: Файл .env не найден');
-        exit("❌ Файл .env не найден");
-    }
-
-    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    if ($lines === false) {
-        error_log('Ошибка: Не удалось прочитать файл .env');
-        exit("❌ Не удалось прочитать файл .env");
-    }
-
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if (str_starts_with($line, '#') || !str_contains($line, '=')) {
-            continue;
-        }
-        [$key, $value] = explode('=', $line, 2);
-        putenv("$key=$value");
-    }
-}
+ob_start(); // Включить буферизацию вывода
+ini_set('display_errors', 0); // Отключить отображение ошибок
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', '/var/www/html/error.log');
 
 // === Функции обработки полей формы ===
 function getPostInput(string $key, string $default = 'Не указано'): string {
@@ -35,10 +16,13 @@ function getCheckboxGroup(string $key): string {
 }
 
 // === Инициализация ===
-loadEnvFile();
+$token = getenv('BOT_API_TOKEN');
+$chatId = getenv('LADY_ID');
 
-$token   = getenv('BOT_API_TOKEN');
-$chatId  = getenv('LADY_ID');
+if (!$token || !$chatId) {
+    error_log('Ошибка: BOT_API_TOKEN или LADY_ID не заданы в переменных окружения');
+    exit("❌ Ошибка сервера: конфигурация не найдена");
+}
 
 // Honeypot: защита от спама
 if (!empty($_POST['email_confirm'])) {
@@ -47,14 +31,15 @@ if (!empty($_POST['email_confirm'])) {
 
 // === Сбор данных ===
 $username = getPostInput('username');
-$contact  = getPostInput('contact');
-$message  = getPostInput('message', 'Без мыслей');
-$project  = getCheckboxGroup('project');
-$budget   = getCheckboxGroup('budget');
+$contact = getPostInput('contact');
+$message = getPostInput('message', 'Без мыслей');
+$project = getCheckboxGroup('project');
+$budget = getCheckboxGroup('budget');
 $formTime = $_POST['form_timestamp'] ?? date('Y-m-d H:i:s');
 
 // === Подготовка текста сообщения ===
 $text = <<<MSG
+Воу-воу, Леди
 📝 Новая заявка:
 
 👤 Имя: $username
@@ -70,12 +55,14 @@ $sendUrl = "https://api.telegram.org/bot{$token}/sendMessage";
 
 $response = file_get_contents($sendUrl . '?' . http_build_query([
     'chat_id' => $chatId,
-    'text'    => $text,
+    'text' => $text,
 ]));
 
 if ($response) {
-    header("Location: thanku.php");
+    header("Location: /thanku.php");
     exit;
 }
 
+error_log('Ошибка отправки в Telegram: ' . $response);
 exit("❌ Ошибка при отправке.");
+?>
