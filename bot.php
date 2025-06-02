@@ -1,20 +1,25 @@
 <?php
-
-// === Загрузка переменных окружения ===
 function loadEnvFile(string $filePath = '/etc/secrets/.env'): void {
+    error_log('Проверка .env: существует=' . (file_exists($filePath) ? 'Да' : 'Нет'));
+    error_log('Проверка .env: читаем=' . (is_readable($filePath) ? 'Да' : 'Нет'));
+    error_log('Права .env: ' . (file_exists($filePath) ? substr(sprintf('%o', fileperms($filePath)), -4) : 'Файл не найден'));
+
     if (!file_exists($filePath)) {
+        error_log('Ошибка: Файл .env не найден');
         exit("❌ Файл .env не найден");
     }
 
     $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        error_log('Ошибка: Не удалось прочитать файл .env');
+        exit("❌ Не удалось прочитать файл .env");
+    }
 
     foreach ($lines as $line) {
         $line = trim($line);
-
         if (str_starts_with($line, '#') || !str_contains($line, '=')) {
             continue;
         }
-
         [$key, $value] = explode('=', $line, 2);
         putenv("$key=$value");
     }
