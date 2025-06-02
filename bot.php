@@ -6,13 +6,9 @@ error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', '/var/www/html/error.log');
 
-// === Функции обработки полей формы ===
+// === Функция обработки полей формы ===
 function getPostInput(string $key, string $default = 'Не указано'): string {
     return htmlspecialchars(trim($_POST[$key] ?? $default));
-}
-
-function getCheckboxGroup(string $key): string {
-    return isset($_POST[$key]) ? implode(', ', array_map('htmlspecialchars', $_POST[$key])) : 'Не выбрано';
 }
 
 // === Инициализация ===
@@ -29,8 +25,12 @@ if (!empty($_POST['email_confirm'])) {
     exit("❌ Ошибка: попытка отправки от бота");
 }
 
+// Проверка согласия
+if (!isset($_POST['consent'])) {
+    exit("❌ Требуется согласие на передачу данных");
+}
+
 // === Сбор данных ===
-$username = getPostInput('username');
 $contact = getPostInput('contact');
 $message = getPostInput('message', 'Без мыслей');
 $project = getCheckboxGroup('project');
@@ -42,7 +42,6 @@ $text = <<<MSG
 Воу-воу, Леди
 📝 Новая заявка:
 
-👤 Имя: $username
 📞 Контакт: $contact
 📌 Тип проекта: $project
 💰 Бюджет: $budget
