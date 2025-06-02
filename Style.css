@@ -450,4 +450,5 @@ h6 {
 }
 .notes {
   color: var(--color-accent);
+  text-decoration: none;
 }
