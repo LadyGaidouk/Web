@@ -27,11 +27,11 @@
         <div class="forms-wide-container">
             <div class="forms wide-form">
                 <p>Что ж, рассказывайте:</p>
-                <input type="text" name="username" placeholder="Как к Вам обращаться?" required>
-                <input type="text" name="contact" placeholder="Номер телефона/@username" required>
+                <input type="text" name="username" placeholder="Мr/Ms?" required>
+                <input type="text" name="contact" placeholder="@username (предпочтительнее) или номер телефона" required>
                 <textarea name="message" aria-label="Расскажите о Вашем бизнесе" required>Первым делом - знакомство. Расскажите о Вашей нише, оставьте ссылку на сайт, группу. Проведём оценку и дадим рекомендации</textarea>
                 <label>
-                     <input type='checkbox' name='policy' style="opacity: 0.5; margin-left: 20px;" required>
+                     <input type="checkbox" name="policy" style="opacity: 0.5; margin-left: 20px;" required>
                         <h6>При отправке заявки я соглашаюсь на передачу данных в Telegram и 
                            <a style="color: var(--color-accent); text-decoration: none;" href="/policy.php">
                                 <span class="clickable">
