@@ -1,5 +1,5 @@
 <?php include 'header.php'; ?>
-        <div class="text policy_doc"> 
+        <div class="policy"> 
             <h4>
               Правовая информация:<br>
               1. Принцип работы сервиса.<br>
