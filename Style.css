@@ -16,6 +16,7 @@ body {
   margin: 0;
   height: 100%;
   font: 100 18px/1 var(--font-main);
+  color: white;
   background: var(--color-bg);
   scroll-behavior: smooth;
   overflow-x: hidden;
