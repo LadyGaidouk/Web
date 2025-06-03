@@ -1,28 +1,41 @@
 <?php
 ob_start();
+session_start();
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', '/var/www/html/error.log');
 
+file_put_contents('/var/www/html/error.log', "DEBUG: bot.php started at " . date('Y-m-d H:i:s') . " with method " . $_SERVER['REQUEST_METHOD'] . "\n", FILE_APPEND);
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    file_put_contents('/var/www/html/error.log', "ERROR: Invalid request method " . $_SERVER['REQUEST_METHOD'] . " at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
     http_response_code(405);
     ob_end_clean();
     exit("Method not allowed");
 }
 
 function getPostInput(string $key, string $default = 'Не указано'): string {
-    return trim($_POST[$key] ?? $default);
+    return htmlspecialchars(trim($_POST[$key] ?? $default));
 }
 
 function getCheckboxGroup(string $name): string {
     if (empty($_POST[$name])) return 'Не указано';
-    return is_array($_POST[$name]) ? implode(', ', $_POST[$name]) : $_POST[$name];
+    return is_array($_POST[$name]) ? implode(', ', array_map('htmlspecialchars', $_POST[$name])) : htmlspecialchars($_POST[$name]);
+}
+
+if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    file_put_contents('/var/www/html/error.log', "ERROR: Invalid CSRF token at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+    http_response_code(403);
+    ob_end_clean();
+    exit("Invalid CSRF token");
 }
 
 $token = getenv('BOT_API_TOKEN');
 $chatId = getenv('LADY_ID');
+
+file_put_contents('/var/www/html/error.log', "DEBUG: BOT_API_TOKEN=" . ($token ? 'set' : 'unset') . ", LADY_ID=" . ($chatId ? 'set' : 'unset') . " at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 
 if (!$token || !$chatId) {
     file_put_contents('/var/www/html/error.log', "ERROR: Missing BOT_API_TOKEN or LADY_ID at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
@@ -31,11 +44,18 @@ if (!$token || !$chatId) {
     exit("Server configuration error");
 }
 
-if (!empty($_POST['email_confirm']) || !isset($_POST['consent'])) {
-    file_put_contents('/var/www/html/error.log', "ERROR: Invalid submission (honeypot or consent) at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+if (!empty($_POST['email_confirm'])) {
+    file_put_contents('/var/www/html/error.log', "ERROR: Bot attempt detected at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+    http_response_code(403);
+    ob_end_clean();
+    exit("Bot attempt detected");
+}
+
+if (!isset($_POST['consent'])) {
+    file_put_contents('/var/www/html/error.log', "ERROR: Consent not provided at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
     http_response_code(400);
     ob_end_clean();
-    exit("Invalid submission");
+    exit("Consent required");
 }
 
 $contact = getPostInput('contact');
@@ -43,6 +63,8 @@ $message = getPostInput('message', 'Без мыслей');
 $project = getCheckboxGroup('project');
 $budget = getCheckboxGroup('budget');
 $formTime = $_POST['form_timestamp'] ?? date('Y-m-d H:i:s');
+
+file_put_contents('/var/www/html/error.log', "DEBUG: Form data - contact='$contact', message='$message', project='$project', budget='$budget', time='$formTime' at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 
 $text = "Воу-воу, Леди\n📝 Новое сообщение через форму-посредник:\n\n"
       . "📞 Контакт: $contact\n"
@@ -95,10 +117,8 @@ function deepClean() {
 }
 deepClean();
 
-if (session_status() === PHP_SESSION_ACTIVE) {
-    $_SESSION = [];
-    session_destroy();
-}
+$_SESSION = [];
+session_destroy();
 
 file_put_contents('/var/www/html/error.log', "DEBUG: Message sent to Telegram at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 header("Location: https://tech.gaidouk.ru/thanku.php");
