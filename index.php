@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
         <div class="text">
-            <h1 style="font-size: 17px;">
+            <h1 style="font-size: 17px; color: white;">
                 Присаживайтесь, обсудим Ваш проект
             </h1>
         </div>
