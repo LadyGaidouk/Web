@@ -34,6 +34,5 @@
     </div>
 </section>
 
-<script src="game.js"></script>
 </body>
 </html>
