@@ -36,6 +36,7 @@ $data = $meta[$page] ?? $meta['index'];
     <!-- Telegram -->
     <meta property="og:url" content="<?= htmlspecialchars($data['og_bot']) ?>">
     <meta property="og:url" content="<?= htmlspecialchars($data['og_channel']) ?>">
+    <meta name="compliance" content="152-fz-exempt">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="<?= htmlspecialchars($data['twitter_card']) ?>">
