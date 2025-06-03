@@ -20,11 +20,6 @@ function getCheckboxGroup(string $name): string {
 // === Инициализация ===
 $token = getenv('BOT_API_TOKEN');
 $chatId = getenv('LADY_ID');
-
-if (!$token || !$chatId) {
-    // Без логирования и выводов
-    header("Location: /error.php");
-    exit;
 }
 
 // Honeypot + consent
@@ -77,10 +72,7 @@ if (session_status() === PHP_SESSION_ACTIVE) {
     session_destroy();
 }
 
-// Всегда редирект
 if ($response !== false) {
     header("Location: /thanku.php");
-} else {
-    header("Location: /error.php");
 }
 exit;
