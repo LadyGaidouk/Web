@@ -1,8 +1,4 @@
-<?php
-header('Content-Type: text/html; charset=utf-8');
-include 'header.php';
-?>
-<section>
+<?php include 'header.php'; ?>
     <div class="text thanks">
         <h1>Благодарим за доверие, вернемся с обратной связью.</h1>
         <p style="opacity: 0.5;">Через 2 секунды запустится игра. Задача: собрать двоичный код.</p>
