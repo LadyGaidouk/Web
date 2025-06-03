@@ -316,7 +316,7 @@ input[type="hidden"][name="form_timestamp"] {
   font-size: 18px;
   font-weight: 300;
   margin: 0 0 36px 18px;
-  font-family: var(--font-main);
+  font-family: var(--font-main); 
   color: var(--color-white); 
 }
 .forms label {
@@ -326,6 +326,7 @@ input[type="hidden"][name="form_timestamp"] {
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 300;
+  font-family: var(--font-main); 
   color: var(--color-white);
 }
 .forms input[type="checkbox"] {
