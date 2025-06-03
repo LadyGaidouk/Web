@@ -17,7 +17,7 @@
     </div>
 </div>
 </section>
-<section class="container2">
+<section class="container2 fade-in">
     <form method="POST" action="bot.php">
         <div style="min-height: 100vh;">
             <div class="zhizha">
