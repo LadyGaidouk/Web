@@ -154,7 +154,7 @@ input[type="hidden"][name="form_timestamp"] {
   display: grid;
   place-content: end center;
 }
-.text h1 {font: 100 18px/1 var(--font-main); color: white;}
+.text h1 {font: 100 18px/1 var(--font-main);}
 
 .text .sub-text, 
 .text .sub-text2 {
@@ -164,7 +164,7 @@ input[type="hidden"][name="form_timestamp"] {
   gap: var(--gap-xl);
 }
 .text .sub-text h1, 
-.text .sub-text2 h1 {font: 300 18px/1 var(--font-main); color: white;}
+.text .sub-text2 h1 {font: 300 18px/1 var(--font-main); }
 .text .sub-text h1 {padding: 0 21px;}
 .text .sub-text a, .text .sub-text2 a {
   color: #ff93bb; 
