@@ -443,12 +443,90 @@ h6 {
   .zhizha3 {top: 539px;}
   
 }
-
 .thanks {
+  position: relative;
   text-align: center;
   padding: 0 5%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-out forwards;
 }
-.notes {
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid var(--color-accent);
+  background: var(--color-blur-bg);
+  display: none;
+  max-width: 1280px;
+  max-height: 720px;
+  width: 100%;
+  height: 100%;
+}
+
+#word-progress {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: var(--color-accent);
+  font-size: 1rem;
+  font-family: var(--font-main);
+}
+
+#score {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--color-accent);
+  font-size: 1rem;
+  font-family: var(--font-main);
+}
+
+.game-over {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  padding: var(--radius);
+  color: var(--color-white);
+  text-align: center;
+  border-radius: var(--radius);
+  box-shadow: var(--color-shadow);
+  animation: zoomIn 0.5s ease-out forwards;
+  z-index: 3;
+  font-family: var(--font-main);
+ }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: 0.5; opacity: 0; }
+  to { transform: 1; opacity: 1; }
+}
+
+.button-play {
+  background: var(--color-accent);
+  border: none;
+  padding: 10px 20px;
+  color: var(--color-bg);
+  cursor: pointer;
+  font-family: var(--font-main);
+  margin: 10px;
+  border-radius: var(--radius);
+  }
+
+.button-play:hover {
+  background: darken(var(--color-accent), 10%);
+}
+
+a.notes {
   color: var(--color-accent);
   text-decoration: none;
 }
