@@ -1,14 +1,20 @@
 <?php
-ob_start(); // Включить буферизацию вывода
-ini_set('display_errors', 0); // Отключить отображение ошибок
+ob_start();
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
-error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', '/var/www/html/error.log');
+error_reporting(0); // Отключаем ВСЕ отчеты об ошибках
+ini_set('log_errors', 0); // Полностью отключаем логирование ошибок
 
-// === Функция обработки полей формы ===
+// === Функции обработки ===
 function getPostInput(string $key, string $default = 'Не указано'): string {
-    return htmlspecialchars(trim($_POST[$key] ?? $default));
+    return trim($_POST[$key] ?? $default); // Убрано htmlspecialchars
+}
+
+function getCheckboxGroup(string $name): string {
+    if (empty($_POST[$name])) return 'Не указано';
+    return is_array($_POST[$name]) 
+        ? implode(', ', $_POST[$name]) 
+        : $_POST[$name];
 }
 
 // === Инициализация ===
@@ -16,52 +22,65 @@ $token = getenv('BOT_API_TOKEN');
 $chatId = getenv('LADY_ID');
 
 if (!$token || !$chatId) {
-    error_log('Ошибка: BOT_API_TOKEN или LADY_ID не заданы в переменных окружения');
-    exit("❌ Ошибка сервера: конфигурация не найдена");
+    // Без логирования и выводов
+    header("Location: /error.php");
+    exit;
 }
 
-// Honeypot: защита от спама
-if (!empty($_POST['email_confirm'])) {
-    exit("❌ Ошибка: попытка отправки от бота");
+// Honeypot + consent
+if (!empty($_POST['email_confirm']) || !isset($_POST['consent'])) {
+    header("Location: /error.php");
+    exit;
 }
 
-// Проверка согласия
-if (!isset($_POST['consent'])) {
-    exit("❌ Требуется согласие на передачу данных");
-}
-
-// === Сбор данных ===
+// === Сбор данных с очисткой ===
 $contact = getPostInput('contact');
 $message = getPostInput('message', 'Без мыслей');
 $project = getCheckboxGroup('project');
 $budget = getCheckboxGroup('budget');
 $formTime = $_POST['form_timestamp'] ?? date('Y-m-d H:i:s');
 
-// === Подготовка текста сообщения ===
-$text = <<<MSG
-Воу-воу, Леди
-📝 Новая заявка:
+// === Формирование сообщения ===
+$text = "Воу-воу, Леди\n📝 Получено новое сообщение через форму-посредник:\n\n"
+      . "📞 Контакт: $contact\n"
+      . "📌 Проект: $project\n"
+      . "💰 Бюджет: $budget\n"
+      . "📅 Время: $formTime\n"
+      . "💭 Сообщение: $message";
 
-📞 Контакт: $contact
-📌 Тип проекта: $project
-💰 Бюджет: $budget
-📅 Время: $formTime
-💭 Сообщение: $message
-MSG;
-
-// === Отправка через Telegram Bot API ===
-$sendUrl = "https://api.telegram.org/bot{$token}/sendMessage";
-
-$response = file_get_contents($sendUrl . '?' . http_build_query([
+// === Отправка через Telegram ===
+$sendUrl = "https://api.telegram.org/bot{$token}/sendMessage?" . http_build_query([
     'chat_id' => $chatId,
-    'text' => $text,
-]));
+    'text' => $text
+]);
 
-if ($response) {
-    header("Location: /thanku.php");
-    exit;
+$context = stream_context_create(['http' => ['timeout' => 5]]);
+$response = @file_get_contents($sendUrl, false, $context);
+
+// === Глубокая очистка памяти ===
+function deepClean() {
+    foreach ($_POST as $key => $value) {
+        if (is_array($value)) {
+            array_walk_recursive($value, function(&$item) {
+                $item = str_repeat('x', strlen($item));
+            });
+        }
+        $_POST[$key] = str_repeat('x', strlen($value));
+    }
+    unset($_POST);
+}
+deepClean();
+
+// Сессия уничтожается только если активна
+if (session_status() === PHP_SESSION_ACTIVE) {
+    $_SESSION = [];
+    session_destroy();
 }
 
-error_log('Ошибка отправки в Telegram: ' . $response);
-exit("❌ Ошибка при отправке.");
-?>
+// Всегда редирект
+if ($response !== false) {
+    header("Location: /thanku.php");
+} else {
+    header("Location: /error.php");
+}
+exit;
