@@ -79,11 +79,11 @@
                         <textarea name="message" aria-label="Опишите Ваш запрос IT проекта" required>Нужен сайт и чат-бот для оптимизации и сокращения расходов... Разработка нового логотипа, прикольного и привлекающего дизайна на сайт и графического дизайна для визиток, рекламных постеров на Озон.</textarea>
                         <label>
                             <input type='checkbox' name='policy' style="opacity: 0.5; margin-left: 20px;" required>
-                                <h6>При отправке заявки я соглашаюсь с 
-                                   <a style="color: var(--color-accent); text-decoration: none;" href="/policy.php">
+                                <h6>При отправке заявки я соглашаюсь на передачу данных в Telegram и 
+                                    <a style="color: var(--color-accent); text-decoration: none;" href="/policy.php">
                                         <span class="clickable">
-                                            этим
-                                    </span>
+                                            политику конфиденциальности
+                                        </span>
                                     </a>
                                 </h6>
                         </label>
