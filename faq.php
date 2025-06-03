@@ -16,7 +16,7 @@
         </div>
     </div>
 </section>
-<section class="container2">
+<section class="container2 fade-in">
     <form class="container2" method="POST" action="bot.php">
         <div class="big_words">
             <p>БУДУЩЕЕ СЕЙЧАС</p>
