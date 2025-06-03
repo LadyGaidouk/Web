@@ -316,7 +316,8 @@ input[type="hidden"][name="form_timestamp"] {
   font-size: 18px;
   font-weight: 300;
   margin: 0 0 36px 18px;
-  color: var(--color-white);
+  font-family: var(--font-main);
+  color: var(--color-white); 
 }
 .forms label {
   display: flex;
