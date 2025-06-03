@@ -15,8 +15,8 @@ include 'header.php';
             <p>Вы собрали секретное слово в двоичном коде!</p>
             <p>Ваше кодовое слово для скидки 10%: <strong>CODE2025</strong></p>
             <p>Сохраните код и укажите его при заказе на email: [ваша_почта] или Telegram: @ваш_логин.</p>
-            <button onclick="copyCode()">Скопировать код</button>
-            <button onclick="continueGame()">Продолжить игру</button>
+            <button class="button-play" onclick="copyCode()">Скопировать код</button>
+            <button class="button-play" onclick="continueGame()">Продолжить игру</button>
         </div>
     </div>
 </section>
