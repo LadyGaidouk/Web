@@ -74,8 +74,8 @@
                 <div class="forms-wide-container">
                     <div class="forms wide-form">
                         <p>Пожелания:</p>
-                        <input type="text" name="username" placeholder="Как к Вам обращаться?" required>
-                        <input type="text" name="contact" placeholder="Номер телефона/@username" required>
+                        <input type="text" name="username" placeholder="Мr/Ms?" required>
+                        <input type="text" name="contact" placeholder="@username (предпочтительнее) или номер телефона" required>
                         <textarea name="message" aria-label="Опишите Ваш запрос IT проекта" required>Нужен сайт и чат-бот для оптимизации и сокращения расходов... Разработка нового логотипа, прикольного и привлекающего дизайна на сайт и графического дизайна для визиток, рекламных постеров на Озон.</textarea>
                         <label>
                             <input type='checkbox' name='policy' style="opacity: 0.5; margin-left: 20px;" required>
@@ -95,7 +95,7 @@
                         <input type="hidden" name="form_timestamp" value="<?= date('c') ?>">
                     </div>
                     <div class="button-container">
-                        <button type="submit" class="action-button clickable">Сделать шаг
+                        <button type="submit" class="action-button">Сделать шаг
                             <img src="assets/Picture/plane.png" alt="Заказать IT услугу" class="button-icon">
                         </button>
                         <p class="npm-text">npm start</p>
